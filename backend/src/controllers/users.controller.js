@@ -19,7 +19,7 @@ const updateUser = async(req, res) => {
 
   let {name, imageUrl, email} = req.body;
   await User.findOneAndUpdate({username: req.params.username}, {name:name, imageUrl: imageUrl, email: email});
-  res.status(204).send({message: "Usuario Actualizado"});
+  res.status(200).send({message: "Usuario Actualizado"});
 };
 
 const changePassword = async(req, res) => {
@@ -28,9 +28,9 @@ const changePassword = async(req, res) => {
   }
 
   let {password} = req.body;
-  let hashed = User.encryptPassword(password);
+  let hashed = await User.encryptPassword(password);
   await User.findOneAndUpdate({username: req.params.username}, {password: hashed});
-  res.status(204).send({message: "Contraseña Actualizada"});
+  res.status(200).send({message: "Contraseña Actualizada"});
 };
 
 const givePermission = async(req, res) => {
@@ -43,7 +43,7 @@ const givePermission = async(req, res) => {
   user.permissions.push(new_permission);
   await user.save();
 
-  res.status(204).send({message: "Permiso asignado"});
+  res.status(200).send({message: "Permiso asignado"});
 };
 
 const deletePermission = async(req, res) => {
@@ -55,13 +55,13 @@ const deletePermission = async(req, res) => {
   user.permissions.splice(user.permissions.indexOf(permission), 1);
   await user.save();
 
-  res.status(204).send({message: "Permiso borrado"});
+  res.status(200).send({message: "Permiso borrado"});
 };
 
 const deleteUser = async(req, res) => {
   await User.findOneAndDelete({username: req.params.username});
 
-  res.status(204).send({message: "Usuario Eliminado"});
+  res.status(200).send({message: "Usuario Eliminado"});
 };
 
 module.exports = {
