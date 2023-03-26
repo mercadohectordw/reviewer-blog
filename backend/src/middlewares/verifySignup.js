@@ -19,4 +19,4 @@ const checkExistingUser = async(req, res, next) => {
 
 module.exports = {
   checkExistingUser
-}
+};

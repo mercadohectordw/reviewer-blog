@@ -16,10 +16,10 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
-}
+};
 
 userSchema.statics.comparePassword = async (password, reveivedPassword) => {
   return await bcrypt.compare(password, reveivedPassword);
-}
+};
 
 module.exports = mongoose.model("User", userSchema);

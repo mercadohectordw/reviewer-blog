@@ -16,7 +16,8 @@ app.use(cors({
 }));
 
 app.use("/api/auth", authRouter);
-app.use("/api/user", userRouter);
+app.use("/api/users", userRouter);
+//app.use("/api/post", );
 
 app.listen(port, () => {
   console.log(`Api loaded on port ${port}`);
