@@ -33,7 +33,7 @@ const changePassword = async(req, res) => {
   res.status(204).send({message: "Contraseña Actualizada"});
 };
 
-const givePermissions = async(req, res) => {
+const givePermission = async(req, res) => {
   let new_permission = req.body.new_permission;
   if(new_permission != "admin" && new_permission != "autor") return res.status(400).send({message: "Rol no valido"});
 
@@ -44,6 +44,18 @@ const givePermissions = async(req, res) => {
   await user.save();
 
   res.status(204).send({message: "Permiso asignado"});
+};
+
+const deletePermission = async(req, res) => {
+  let permission = req.body.permission;
+
+  let user = await User.findOne({username: req.params.username});
+  if(!user) return res.status(404).send({message: "Usuario no encontrado"});
+
+  user.permissions.splice(user.permissions.indexOf(permission), 1);
+  await user.save();
+
+  res.status(204).send({message: "Permiso borrado"});
 };
 
 const deleteUser = async(req, res) => {
@@ -57,6 +69,7 @@ module.exports = {
   getAll,
   updateUser,
   changePassword,
-  givePermissions,
+  givePermission,
+  deletePermission,
   deleteUser
 };
