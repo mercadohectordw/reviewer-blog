@@ -3,7 +3,8 @@ const cors = require('cors');
 require("dotenv").config();
 const {dbConnect} = require('./db');
 const authRouter = require('./routers/auth.routes');
-const userRouter = require('./routers/users.routes');
+const usersRouter = require('./routers/users.routes');
+const postsRouter = require('./routers/posts.routes');
 
 dbConnect();
 
@@ -16,8 +17,8 @@ app.use(cors({
 }));
 
 app.use("/api/auth", authRouter);
-app.use("/api/users", userRouter);
-//app.use("/api/post", );
+app.use("/api/users", usersRouter);
+app.use("/api/posts", postsRouter);
 
 app.listen(port, () => {
   console.log(`Api loaded on port ${port}`);

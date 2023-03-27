@@ -36,8 +36,15 @@ const isAutor = (req, res, next) => {
   next();
 };
 
+const isAutorOrAdmin = (req, res, next) => {
+  if(!req.userData.permissions.includes("autor") && !req.userData.permissions.includes("admin")) return res.status(401).send({message:"No Autorizado"});
+  
+  next();
+};
+
 module.exports = {
   verifyToken,
   isAdmin,
-  isAutor
+  isAutor,
+  isAutorOrAdmin
 };
