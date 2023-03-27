@@ -5,6 +5,7 @@ const {dbConnect} = require('./db');
 const authRouter = require('./routers/auth.routes');
 const usersRouter = require('./routers/users.routes');
 const postsRouter = require('./routers/posts.routes');
+const commentsRouter = require('./routers/comments.routes');
 
 dbConnect();
 
@@ -19,6 +20,7 @@ app.use(cors({
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/posts", postsRouter);
+app.use("/api/comments", commentsRouter);
 
 app.listen(port, () => {
   console.log(`Api loaded on port ${port}`);
