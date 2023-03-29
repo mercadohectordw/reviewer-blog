@@ -18,7 +18,7 @@ const signUp = async(req, res) => {
     res.status(200).send({message: "Usuario Creado", token: token});
 
   } catch (e) {
-    res.status(500).send({message: "Algo salió mal", error: e.message});
+    res.status(400).send({message: "Algo salió mal", error: e.message});
   }
 };
 

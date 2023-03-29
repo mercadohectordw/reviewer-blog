@@ -1,13 +1,31 @@
 const User = require('../models/User');
 
-const getUser = async(req, res) => {
-  let user = await User.findOne({username: req.params.username});
+const getUserByToken = async(req, res) => {
+  let user = await User.findOne({username: req.userData.username}, {password:0, createdAt: 0, updatedAt: 0});
+
+  if(!user) return res.status(400).send({message: "Usuario no encontrado"});
 
   res.status(200).send(user);
 };
 
+const getUser = async(req, res) => {
+  let user = await User.findOne({username: req.params.username}, {password:0, updatedAt: 0});
+
+  if(!user || user.permissions.includes("autor")) return res.status(400).send({message: "Usuario no encontrado"});
+
+  res.status(200).send(user);
+};
+
+const getAutor = async(req, res) => {
+  let autor = await User.findOne({username: req.params.username}, {password:0, updatedAt: 0});
+
+  if(!autor || !autor.permissions.includes("autor")) return res.status(400).send({message: "Autor no encontrado"});
+
+  res.status(200).send(autor);
+};
+
 const getAll = async (req, res) => {
-  let users = await User.find();
+  let users = await User.find({}, {password: 0});
 
   res.status(200).send(users);
 };
@@ -65,7 +83,9 @@ const deleteUser = async(req, res) => {
 };
 
 module.exports = {
+  getUserByToken,
   getUser,
+  getAutor,
   getAll,
   updateUser,
   changePassword,

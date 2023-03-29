@@ -1,0 +1,35 @@
+<main class="px-4 sm:px-10 lg:px-20 pt-10 pb-20">
+  <div class="max-w-[24rem] mx-auto p-3 sm:p-5 rounded-md outline outline-1 outline-neutral-200 bg-white shadow-sm">
+    <h2>Registrar Cuenta</h2>
+  
+    <form (ngSubmit)="submitForm();" [formGroup]="registerUser" method="post">
+      <input type="text" formControlName="name" class="mt-2 px-3 py-1 w-full border-b border-neutral-300" placeholder="Nombre Completo">
+      <span *ngIf="registerUser.get('name')?.hasError('required') && registerUser.get('name')?.touched" class="text-xs text-red-500">El nombre es requerido</span>
+  
+      <input type="text" formControlName="username" class="mt-2 px-3 py-1 w-full border-b border-neutral-300" placeholder="Nombre de usuario">
+      <span *ngIf="registerUser.get('username')?.hasError('required') && registerUser.get('username')?.touched" class="text-xs text-red-500">El nombre de usuario es requerido</span>
+      
+      <input type="text" formControlName="email" class="mt-2 px-3 py-1 w-full border-b border-neutral-300" placeholder="Email">
+      <span *ngIf="registerUser.get('email')?.hasError('required') && registerUser.get('email')?.touched" class="text-xs text-red-500">El email es requerido</span>
+      <span *ngIf="registerUser.get('email')?.hasError('email') && registerUser.get('email')?.touched" class="text-xs text-red-500">El email es invalido</span>
+      
+      <input type="password" formControlName="password" class="mt-2 px-3 py-1 w-full border-b border-neutral-300" placeholder="Contraseña">
+      <span *ngIf="registerUser.get('password')?.hasError('required') && registerUser.get('password')?.touched" class="text-xs text-red-500">La contraseña es requerida</span>
+      <span *ngIf="registerUser.get('password')?.hasError('pattern') && registerUser.get('password')?.touched" class="text-xs text-red-500">La contraseña debe tener un mínimo de 8 carácteres y un máximo de 16 carácteres</span>
+      
+      
+      <input type="password" formControlName="confirm_password" class="mt-2 px-3 py-1 w-full border-b border-neutral-300" placeholder="Confirmar Contraseña">
+      <span *ngIf="registerUser.get('confirm_password')?.hasError('required') && registerUser.get('confirm_password')?.touched" class="text-xs text-red-500">Requerido</span>
+      <span *ngIf="registerUser.get('password')?.value != registerUser.get('confirm_password')?.value && registerUser.get('confirm_password')?.touched" class="text-xs text-red-500">Las contraseñas no son iguales</span>
+  
+      <div class="mt-4">
+        <button type="submit" class="outline outline-1 outline-red-500 text-red-500 px-4 py-2 rounded-md mr-2">Enviar</button>
+        <span *ngIf="errorMessage != ''" class="text-red-600">{{errorMessage}}</span>
+      </div>
+    </form>
+
+    <div class="text-xs mt-4">
+      ¿Ya tienes una cuenta? <a routerLink="/login" class="text-red-500">Puedes ingresar aquí</a>
+    </div>
+  </div>
+</main>

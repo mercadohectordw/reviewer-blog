@@ -1,0 +1,19 @@
+<main class="px-4 sm:px-10 lg:px-20 pt-10 pb-20">
+  <div class="max-w-[24rem] mx-auto p-3 sm:p-5 rounded-md outline outline-1 outline-neutral-200 bg-white shadow-sm">
+    <h2>Ingresar</h2>
+  
+    <form (ngSubmit)="submitForm();" [formGroup]="loginUser" method="post" class="mt-2">
+      <input type="text" formControlName="email" class="my-1 px-3 py-1 w-full border-b border-neutral-300" placeholder="Email">
+      <input type="password" formControlName="password" class="my-1 px-3 py-1 w-full border-b border-neutral-300" placeholder="Contraseña">
+      
+      <div class="mt-4">
+        <button type="submit" class="outline outline-1 outline-red-500 text-red-500 px-4 py-2 rounded-md mr-2">Enviar</button>
+        <span *ngIf="errorMessage != ''" class="text-red-600">{{errorMessage}}</span>
+      </div>
+    </form>
+
+    <div class="text-xs mt-4">
+      ¿No tienes una cuenta? <a routerLink="/register" class="text-red-500">Puedes registrarte aquí</a>
+    </div>
+  </div>
+</main>

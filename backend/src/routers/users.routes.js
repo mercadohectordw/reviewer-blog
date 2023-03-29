@@ -1,9 +1,11 @@
-const { getAll, getUser, updateUser, changePassword, deleteUser, givePermission, deletePermission } = require('../controllers/users.controller');
+const { getAll, getUser, updateUser, changePassword, deleteUser, givePermission, deletePermission, getUserByToken, getAutor } = require('../controllers/users.controller');
 const { verifyToken, isAdmin } = require('../middlewares/authJwt');
 
 const router = require('express').Router();
 
 router.get("/", getAll);
+router.get("/token", verifyToken, getUserByToken);
+router.get("/autor/:username", getAutor);
 router.get("/:username", getUser);
 
 router.put("/password/:username", verifyToken, changePassword);

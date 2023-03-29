@@ -6,14 +6,13 @@ const checkExistingUser = async(req, res, next) => {
     
     const emailFound = await User.findOne({email: req.body.email});
 
-    if(usernameFound || emailFound){
-      return res.status(400).json({message: "El usuario ya existe"});
-    }
+    if(usernameFound) throw new Error("El nombre de usuario ya está ocupado");
+    if(emailFound) throw new Error("El email ya está registrado");
+    if(req.body.password.length < 8 || req.body.password.length > 16) throw new Error('Contraseña invalida');
 
     next();
   } catch (e) {
-    console.log(e);
-    res.status(500).json({message: "Algo salió mal", error: e.message});
+    res.status(400).json({message: "Algo salió mal", error: e.message});
   }
 };
 

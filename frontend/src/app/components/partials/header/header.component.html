@@ -1,0 +1,60 @@
+<header class="bg-white shadow-sm px-4">
+  <div class="max-w-[1440px] mx-auto grid grid-cols-3 items-center gap-x-2">
+    <nav class="h-min">
+      <ul class="flex items-center gap-2">
+        <li>
+          <a routerLink="/home" class="block px-2 py-1 text-lg">
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a routerLink="/autors" class="block px-2 py-1 text-lg">
+            Autores
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <div class="py-4 flex items-center justify-center">
+      <h1 class="text-2xl">
+        <a routerLink="/home">The Reviewer Blog</a>
+      </h1>
+    </div>
+
+    <div *ngIf="!user" class="flex justify-end">
+      <ul class="flex items-center gap-2">
+        <li>
+          <a routerLink="/login" class="block p-1.5 hover:text-red-500">
+            Ingresar
+          </a>
+        </li>
+        <li>
+          <a routerLink="/register" class="block p-1.5 hover:text-red-500">
+            Registrarse
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div *ngIf="user" class="flex justify-end">
+      <ul class="flex items-center gap-2">
+        <li>
+          <button  type="button" (click)="logout()" class="block w-full p-1.5 hover:text-red-500">
+            Salir
+          </button>
+        </li>
+        <li>
+          <a routerLink="/settings" class="block p-1.5 hover:text-red-500">
+            Opciones
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="profilePath" class="p-1.5 flex gap-1 items-center hover:text-red-500">
+            <span class="">{{user.name}}</span>
+            <img [src]="user.imageUrl" alt="avatar" class="text-sm w-10 h-10 object-contain">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

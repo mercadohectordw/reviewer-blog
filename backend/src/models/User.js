@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
   username: {type: String, required: true},
   name: {type: String, required: true},
-  email: {type: String, required: true},
+  email: {type: String, match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email invalido'], required: true},
   password: {type: String, required: true},
   imageUrl: {type: String, default: 'https://files.catbox.moe/entoxi.jpg', required: true},
   permissions: {type: [String]},
