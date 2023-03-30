@@ -12,8 +12,8 @@ import { UserOptionsComponent } from './components/pages/user-options/user-optio
 const routes: Routes = [
   {path: "home", component: HomeComponent},
   {path: "post/:post_id", component: PostComponent},
-  {path: "user/:user_id", component: UserProfileComponent},
-  {path: "autor/:autor_id", component: AutorProfileComponent},
+  {path: "user/:username", component: UserProfileComponent},
+  {path: "autor/:username", component: AutorProfileComponent},
   {path: "settings", component: UserOptionsComponent},
   
   {path: "login", component: LoginComponent},

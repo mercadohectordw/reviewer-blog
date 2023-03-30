@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 const getUserByToken = async(req, res) => {
-  let user = await User.findOne({username: req.userData.username}, {password:0, createdAt: 0, updatedAt: 0});
+  let user = await User.findOne({username: req.userData.username}, {bio: 0, password: 0, createdAt: 0, updatedAt: 0});
 
   if(!user) return res.status(400).send({message: "Usuario no encontrado"});
 
@@ -9,7 +9,7 @@ const getUserByToken = async(req, res) => {
 };
 
 const getUser = async(req, res) => {
-  let user = await User.findOne({username: req.params.username}, {password:0, updatedAt: 0});
+  let user = await User.findOne({username: req.params.username}, {email:0, password:0, updatedAt: 0});
 
   if(!user || user.permissions.includes("autor")) return res.status(400).send({message: "Usuario no encontrado"});
 
@@ -17,7 +17,7 @@ const getUser = async(req, res) => {
 };
 
 const getAutor = async(req, res) => {
-  let autor = await User.findOne({username: req.params.username}, {password:0, updatedAt: 0});
+  let autor = await User.findOne({username: req.params.username}, {email:0, password:0, updatedAt: 0});
 
   if(!autor || !autor.permissions.includes("autor")) return res.status(400).send({message: "Autor no encontrado"});
 
@@ -35,8 +35,8 @@ const updateUser = async(req, res) => {
     return res.status(401).send({message: "No Autorizado"});
   }
 
-  let {name, imageUrl, email} = req.body;
-  await User.findOneAndUpdate({username: req.params.username}, {name:name, imageUrl: imageUrl, email: email});
+  let {name, imageUrl, email, bio} = req.body;
+  await User.findOneAndUpdate({username: req.params.username}, {name:name, imageUrl: imageUrl, email: email, bio: bio});
   res.status(200).send({message: "Usuario Actualizado"});
 };
 

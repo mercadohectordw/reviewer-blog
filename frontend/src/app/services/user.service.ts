@@ -26,6 +26,14 @@ export class UserService {
     return this.http.get<any>(this.api + 'users/token/', httpOptions);
   }
   
+  getUser(username: string): Observable<any>{
+    return this.http.get<any>(this.api + 'users/' + username);
+  }
+
+  getAutor(username: string): Observable<any>{
+    return this.http.get<any>(this.api + 'users/autor/' + username);
+  }
+  
 
   generateHeader(token:string): any{
     return {

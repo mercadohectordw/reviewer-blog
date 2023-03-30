@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   email: {type: String, match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email invalido'], required: true},
   password: {type: String, required: true},
   imageUrl: {type: String, default: 'https://files.catbox.moe/entoxi.jpg', required: true},
+  bio: {type: String},
   permissions: {type: [String]},
 },{
   timestamps: true,

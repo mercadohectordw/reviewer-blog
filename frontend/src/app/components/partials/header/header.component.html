@@ -1,14 +1,14 @@
 <header class="bg-white shadow-sm px-4">
   <div class="max-w-[1440px] mx-auto grid grid-cols-3 items-center gap-x-2">
     <nav class="h-min">
-      <ul class="flex items-center gap-2">
+      <ul class="flex items-center gap-8">
         <li>
-          <a routerLink="/home" class="block px-2 py-1 text-lg">
+          <a routerLink="/home" class="block py-1 text-lg hover:text-red-500">
             Inicio
           </a>
         </li>
         <li>
-          <a routerLink="/autors" class="block px-2 py-1 text-lg">
+          <a routerLink="/autors" class="block py-1 text-lg hover:text-red-500">
             Autores
           </a>
         </li>
@@ -22,14 +22,14 @@
     </div>
 
     <div *ngIf="!user" class="flex justify-end">
-      <ul class="flex items-center gap-2">
+      <ul class="flex items-center gap-4">
         <li>
-          <a routerLink="/login" class="block p-1.5 hover:text-red-500">
+          <a routerLink="/login" class="block py-1 hover:text-red-500">
             Ingresar
           </a>
         </li>
         <li>
-          <a routerLink="/register" class="block p-1.5 hover:text-red-500">
+          <a routerLink="/register" class="block py-1 hover:text-red-500">
             Registrarse
           </a>
         </li>
@@ -37,19 +37,19 @@
     </div>
     
     <div *ngIf="user" class="flex justify-end">
-      <ul class="flex items-center gap-2">
+      <ul class="flex items-center gap-8">
         <li>
-          <button  type="button" (click)="logout()" class="block w-full p-1.5 hover:text-red-500">
+          <button  type="button" (click)="logout()" class="block w-full py-1.5 hover:text-red-500">
             Salir
           </button>
         </li>
         <li>
-          <a routerLink="/settings" class="block p-1.5 hover:text-red-500">
+          <a routerLink="/settings" class="block py-1.5 hover:text-red-500">
             Opciones
           </a>
         </li>
         <li>
-          <a [routerLink]="profilePath" class="p-1.5 flex gap-1 items-center hover:text-red-500">
+          <a [routerLink]="profilePath" class="py-1.5 flex gap-1 items-center hover:text-red-500">
             <span class="">{{user.name}}</span>
             <img [src]="user.imageUrl" alt="avatar" class="text-sm w-10 h-10 object-contain">
           </a>

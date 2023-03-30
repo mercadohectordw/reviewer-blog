@@ -5,6 +5,7 @@ export class User{
   email!: string;
   password?: string;
   imageUrl?: string;
+  bio?: string;
   permissions?: string[];
   createdAt?: string;
   updatedAt?: string;
