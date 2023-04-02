@@ -1,16 +1,15 @@
 const Post = require('../models/Post');
 
-const getPostsByAutor = async(req, res) => {
-  let post = await Post.find({autor:req.params.autor_id}, "-content -autor")
-    .sort({createdAt:-1})
-    .limit(10);
+const getPostsByAuthor = async(req, res) => {
+  let post = await Post.find({author:req.params.author_id}, "-content -author")
+    .sort({createdAt:-1});
 
   res.status(200).send(post);
 };
 
 const getPost = async(req, res) => {
   let post = await Post.findById(req.params.post_id)
-    .populate("autor", "username name imageUrl bio");
+    .populate("author", "username name imageUrl bio");
 
   res.status(200).send(post);
 };
@@ -28,7 +27,7 @@ const createPost = async(req, res) => {
     title,
     imageUrl,
     content,
-    autor: req.userData._id,
+    author: req.userData._id,
     tags
   });
 
@@ -41,7 +40,7 @@ const updatePost = async(req, res) => {
   if(!postToUpdate) return res.status(404).send({message: "Post no encontrado"});
 
   if(req.userData.permissions.includes("autor") && !req.userData.permissions.includes("admin")){
-    if(!postToUpdate.autor.equals(req.userData._id)){
+    if(!postToUpdate.author.equals(req.userData._id)){
       return res.status(400).send({message: "Autor No Autorizado"});
     }
   }
@@ -71,7 +70,7 @@ const deletePost = async(req, res) => {
 };
 
 module.exports = {
-  getPostsByAutor,
+  getPostsByAuthor,
   getPost,
   getAll,
   createPost,

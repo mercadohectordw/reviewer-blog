@@ -21,8 +21,8 @@ export class HeaderComponent implements OnInit {
         next: (res:any) => {
           this.user = res;
 
-          if(res.permissions.includes("autor")){
-            this.profilePath = `/autor/${res.username}`
+          if(res.permissions.includes("author")){
+            this.profilePath = `/author/${res.username}`
           } else {
             this.profilePath = `/user/${res.username}`
           }

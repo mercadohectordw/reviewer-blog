@@ -3,9 +3,10 @@ import { Post } from "./Post";
 
 export class Comment{
   _id?: string;
-  autor?: User;
-  post!: Post | string;
-  comment?: Comment | string;
+  author?: User;
+  post?: Post;
+  parentComment?: string;
+  replies?: Comment[]; 
   content!: string;
   hidden?: boolean;
   createdAt?: string;

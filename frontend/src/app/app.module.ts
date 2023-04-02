@@ -14,7 +14,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component';
-import { AutorProfileComponent } from './components/pages/autor-profile/autor-profile.component';
+import { AuthorProfileComponent } from './components/pages/author-profile/author-profile.component';
 import { UserOptionsComponent } from './components/pages/user-options/user-options.component';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { UserOptionsComponent } from './components/pages/user-options/user-optio
     RegisterComponent,
     PageNotFoundComponent,
     UserProfileComponent,
-    AutorProfileComponent,
+    AuthorProfileComponent,
     UserOptionsComponent
   ],
   imports: [

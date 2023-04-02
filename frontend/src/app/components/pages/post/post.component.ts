@@ -14,8 +14,8 @@ import { PostService } from 'src/app/services/post.service';
 export class PostComponent implements OnInit {
 
   post!: Post;
-  autor?: User;
-  comments!: Comment[];
+  author!: User;
+  comments?: Comment[];
 
   constructor(private postService: PostService, private commentService: CommentService, private route: ActivatedRoute, private router: Router) { }
 
@@ -25,8 +25,8 @@ export class PostComponent implements OnInit {
         this.post = res;
         document.title = this.post.title + " - Reviewer";
         this.getComments();
-        if(typeof this.post.autor !== "string"){
-          this.autor = this.post.autor;
+        if(typeof this.post.author !== "string"){
+          this.author = this.post.author!;
         }
       },
       error: (err:any) => {
@@ -39,7 +39,6 @@ export class PostComponent implements OnInit {
     this.commentService.getCommentsByPost(this.route.snapshot.params['post_id']).subscribe({
       next: (res:Comment[]) => {
         this.comments = res;
-        console.log(this.comments);
       },
       error: (err:any) => {
         console.log(err.error.message);

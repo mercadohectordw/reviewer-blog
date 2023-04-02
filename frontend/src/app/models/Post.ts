@@ -5,7 +5,7 @@ export class Post{
   title!: string;
   imageUrl?: string;
   content?: string;
-  autor?: User | string;
+  author?: User | string;
   tags?: string[];
   hidden?: boolean;
   createdAt?: string;

@@ -1,14 +1,14 @@
-const { getAll, getPost, createPost, updatePost, changeVisibility, deletePost, getPostsByAutor } = require('../controllers/posts.controller');
-const { isAutor, verifyToken, isAdmin, isAutorOrAdmin } = require('../middlewares/authJwt');
+const { getAll, getPost, createPost, updatePost, changeVisibility, deletePost, getPostsByAuthor } = require('../controllers/posts.controller');
+const { isAuthor, verifyToken, isAdmin, isAuthorOrAdmin } = require('../middlewares/authJwt');
 
 const router = require('express').Router();
 
 router.get("/", getAll);
-router.get("/autor/:autor_id", getPostsByAutor);
+router.get("/author/:author_id", getPostsByAuthor);
 router.get("/:post_id", getPost);
 
-router.post("/", [verifyToken, isAutor], createPost);
-router.put("/:post_id", [verifyToken, isAutorOrAdmin], updatePost);
+router.post("/", [verifyToken, isAuthor], createPost);
+router.put("/:post_id", [verifyToken, isAuthorOrAdmin], updatePost);
 router.put("/visibility/:post_id", [verifyToken, isAdmin], changeVisibility);
 
 router.delete("/:post_id", [verifyToken, isAdmin], deletePost);

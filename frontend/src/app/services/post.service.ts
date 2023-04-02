@@ -12,8 +12,8 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  getPostsByAutor(autor_id: string): Observable<any>{
-    return this.http.get<any>(this.api + 'posts/autor/' + autor_id);
+  getPostsByAuthor(author_id: string): Observable<any>{
+    return this.http.get<any>(this.api + 'posts/author/' + author_id);
   }
 
   getPost(post_id: string): Observable<any>{

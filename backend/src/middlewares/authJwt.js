@@ -30,14 +30,14 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-const isAutor = (req, res, next) => {
-  if(!req.userData.permissions.includes("autor")) return res.status(401).send({message:"No Autorizado"});
+const isAuthor = (req, res, next) => {
+  if(!req.userData.permissions.includes("author")) return res.status(401).send({message:"No Autorizado"});
   
   next();
 };
 
-const isAutorOrAdmin = (req, res, next) => {
-  if(!req.userData.permissions.includes("autor") && !req.userData.permissions.includes("admin")) return res.status(401).send({message:"No Autorizado"});
+const isAuthorOrAdmin = (req, res, next) => {
+  if(!req.userData.permissions.includes("author") && !req.userData.permissions.includes("admin")) return res.status(401).send({message:"No Autorizado"});
   
   next();
 };
@@ -45,6 +45,6 @@ const isAutorOrAdmin = (req, res, next) => {
 module.exports = {
   verifyToken,
   isAdmin,
-  isAutor,
-  isAutorOrAdmin
+  isAuthor,
+  isAuthorOrAdmin
 };

@@ -11,7 +11,7 @@ const getUserByToken = async(req, res) => {
 const getUser = async(req, res) => {
   let user = await User.findOne({username: req.params.username}, {email:0, password:0, updatedAt: 0});
 
-  if(!user || user.permissions.includes("autor")) return res.status(400).send({message: "Usuario no encontrado"});
+  if(!user || user.permissions.includes("author")) return res.status(400).send({message: "Usuario no encontrado"});
 
   res.status(200).send(user);
 };
@@ -19,7 +19,7 @@ const getUser = async(req, res) => {
 const getAutor = async(req, res) => {
   let autor = await User.findOne({username: req.params.username}, {email:0, password:0, updatedAt: 0});
 
-  if(!autor || !autor.permissions.includes("autor")) return res.status(400).send({message: "Autor no encontrado"});
+  if(!autor || !autor.permissions.includes("author")) return res.status(400).send({message: "Autor no encontrado"});
 
   res.status(200).send(autor);
 };
@@ -53,7 +53,7 @@ const changePassword = async(req, res) => {
 
 const givePermission = async(req, res) => {
   let new_permission = req.body.new_permission;
-  if(new_permission != "admin" && new_permission != "autor") return res.status(400).send({message: "Rol no valido"});
+  if(new_permission != "admin" && new_permission != "author") return res.status(400).send({message: "Rol no valido"});
 
   let user = await User.findOne({username: req.params.username});
   if(!user) return res.status(404).send({message: "Usuario no encontrado"});

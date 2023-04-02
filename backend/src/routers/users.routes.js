@@ -5,7 +5,7 @@ const router = require('express').Router();
 
 router.get("/", getAll);
 router.get("/token", verifyToken, getUserByToken);
-router.get("/autor/:username", getAutor);
+router.get("/author/:username", getAutor);
 router.get("/:username", getUser);
 
 router.put("/password/:username", verifyToken, changePassword);
