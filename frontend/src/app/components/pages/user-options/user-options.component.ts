@@ -10,6 +10,7 @@ export class UserOptionsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    document.title = `Opciones - Reviewer`;
   }
 
 }

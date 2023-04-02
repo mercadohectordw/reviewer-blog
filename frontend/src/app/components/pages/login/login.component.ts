@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.title = `Ingresar - Reviewer`;
   }
 
   submitForm(): void{

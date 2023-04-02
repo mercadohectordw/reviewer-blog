@@ -1,8 +1,9 @@
-const { changeVisibility, getCommentsByPost, createComment, updateComment, deleteComment } = require('../controllers/comments.controller');
+const { changeVisibility, getCommentsByPost, createComment, updateComment, deleteComment, getCommentsByUser } = require('../controllers/comments.controller');
 const { verifyToken, isAdmin } = require('../middlewares/authJwt');
 
 const router = require('express').Router();
 
+router.get("/user/:user_id", getCommentsByUser);
 router.get("/:post_id", getCommentsByPost);
 
 router.post("/:post_id", verifyToken, createComment);

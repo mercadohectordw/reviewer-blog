@@ -1,1 +1,63 @@
-<p>post works!</p>
+<main class="px-8 pt-8 pb-20">
+  <div class="max-w-[1024px] mx-auto">
+    <section class="mb-16">
+      <h2 class="text-4xl font-bold">{{post.title}}</h2>
+  
+      <div class="my-8 flex items-center gap-4">
+        <a routerLink="/autor/{{autor!.username}}">
+          <img src="{{autor!.imageUrl}}" alt="{{autor!.name}}" class="w-16 h-16 object-cover aspect-square rounded-full">
+        </a>
+        <div>
+          <a routerLink="/autor/{{autor!.username}}">
+            <h3 class="">Por <span class="font-bold">{{autor!.name}}</span> - <span>@{{autor!.username}}</span></h3>
+          </a>
+          <div class="text-sm">
+            {{post.createdAt | date:'mm:h d/M/yy'}} <span *ngIf="post.createdAt != post.updatedAt">- Editado {{post.updatedAt | date:'mm:h d/M/yy'}}</span>
+          </div>
+        </div>
+      </div>
+  
+      <img src="{{post.imageUrl}}" alt="{{post.title}}" class="w-full">
+      <div class="my-16" [innerHTML]="post.content"></div>
+
+      <div class="flex items-start gap-16 px-16">
+        <a routerLink="/autor/{{autor!.username}}">
+          <img src="{{autor!.imageUrl}}" alt="{{autor!.name}}" class="w-40 h-40 object-cover aspect-square rounded-full">
+        </a>
+        <div class="mt-4">
+          <a routerLink="/autor/{{autor!.username}}">
+            <h3 class="text-2xl">Por <span class="font-bold">{{autor!.name}}</span> - <span>@{{autor!.username}}</span></h3>
+          </a>
+          <p>{{autor!.bio}}</p>
+          <a routerLink="/autor/{{autor!.username}}" class="underline hover:text-red-500">
+            Ver Publicaciones
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h4 class="text-xl border-b border-neutral-200">Comentarios</h4>
+      
+      <ul>
+        <li *ngFor="let c of comments" class="my-8 flex items-start gap-4">
+          <a routerLink="/autor/{{c.autor!.username}}">
+            <img src="{{c.autor!.imageUrl}}" alt="{{c.autor!.name}}" class="w-16 h-16 object-cover aspect-square rounded-full">
+          </a>
+          <div>
+            <div class="mb-2 flex items-baseline gap-4">
+              <a routerLink="/autor/{{c.autor!.username}}">
+                <h4><span class="font-bold">{{c.autor!.name}}</span> - <span>@{{c.autor!.username}}</span></h4>
+              </a>
+              <span class="text-xs">
+                {{c.createdAt | date:'mm:h d/M/yy'}} <span *ngIf="c.createdAt != c.updatedAt">- Editado {{c.updatedAt | date:'mm:h d/M/yy'}}</span>
+              </span>
+            </div>
+            
+            <div [innerHTML]="c.content"></div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</main>

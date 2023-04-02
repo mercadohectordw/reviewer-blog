@@ -1,7 +1,18 @@
 const Comment = require('../models/Comment');
 
+const getCommentsByUser = async(req, res) => {
+  let comments = await Comment.find({autor: req.params.user_id})
+    .sort({createdAt:-1})
+    .limit(10)
+    .populate("post", "title imageUrl");
+
+  res.status(200).send(comments);
+};
+
 const getCommentsByPost = async(req, res) => {
   let comments = await Comment.find({post: req.params.post_id})
+    .sort({createdAt:-1})
+    .populate("autor", "name username imageUrl");
 
   res.status(200).send(comments);
 };
@@ -58,6 +69,7 @@ const deleteComment = async(req, res) => {
 }; 
 
 module.exports = {
+  getCommentsByUser,
   getCommentsByPost,
   createComment,
   updateComment,

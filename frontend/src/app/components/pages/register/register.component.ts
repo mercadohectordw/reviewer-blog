@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.title = `Registro - Reviewer`;
   }
 
   submitForm(): void{

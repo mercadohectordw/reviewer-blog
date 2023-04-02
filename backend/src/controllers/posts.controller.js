@@ -1,7 +1,16 @@
 const Post = require('../models/Post');
 
+const getPostsByAutor = async(req, res) => {
+  let post = await Post.find({autor:req.params.autor_id}, "-content -autor")
+    .sort({createdAt:-1})
+    .limit(10);
+
+  res.status(200).send(post);
+};
+
 const getPost = async(req, res) => {
-  let post = await Post.findById(req.params.post_id);
+  let post = await Post.findById(req.params.post_id)
+    .populate("autor", "username name imageUrl bio");
 
   res.status(200).send(post);
 };
@@ -62,6 +71,7 @@ const deletePost = async(req, res) => {
 };
 
 module.exports = {
+  getPostsByAutor,
   getPost,
   getAll,
   createPost,

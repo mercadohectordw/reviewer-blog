@@ -1,9 +1,10 @@
-const { getAll, getPost, createPost, updatePost, changeVisibility, deletePost } = require('../controllers/posts.controller');
+const { getAll, getPost, createPost, updatePost, changeVisibility, deletePost, getPostsByAutor } = require('../controllers/posts.controller');
 const { isAutor, verifyToken, isAdmin, isAutorOrAdmin } = require('../middlewares/authJwt');
 
 const router = require('express').Router();
 
 router.get("/", getAll);
+router.get("/autor/:autor_id", getPostsByAutor);
 router.get("/:post_id", getPost);
 
 router.post("/", [verifyToken, isAutor], createPost);
