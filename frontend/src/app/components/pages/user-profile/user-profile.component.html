@@ -1,5 +1,5 @@
 <main class="px-8 pt-8 pb-20">
-  <div class="max-w-[1440px] mx-auto">
+  <div class="max-w-[1024px] mx-auto">
     <div class="mb-4 flex justify-center gap-4">
       <div>
         <img src="{{user.imageUrl}}" alt="Avatar" class="h-24 w-24 object-cover rounded-full shadow">
@@ -16,18 +16,36 @@
       </div>
     </div>
 
-    <div class="mb-8">
+    <div class="mb-16">
       <p  class="text-center text-neutral-500">
         {{user.bio}}
       </p>
     </div>
 
     <div>
-      <h3 class="mb-4 text-lg border-b border-neutral-200">
+      <h3 class="mb-8 text-lg border-b border-neutral-200">
         ULTIMOS COMENTARIOS
       </h3>
       <ul>
-        <li></li>
+        <li *ngFor="let c of comments" class="my-8 flex items-start gap-4">
+          <a routerLink="/post/{{c.post!._id}}">
+            <img src="{{c.post!.imageUrl}}" alt="Portada" class="w-16 h-16 object-cover aspect-square">
+          </a>
+          <div>
+            <div class="mb-2">
+              <h4>Comentario en el post:
+                <a routerLink="/post/{{c.post!._id}}">
+                  <span class="font-bold">{{c.post!.title}}</span>
+                </a>
+              </h4>
+              <span class="text-xs">
+                Comentado el {{c.createdAt | date:'h:mm d/M/yy'}} <span *ngIf="c.createdAt != c.updatedAt">- Editado {{c.updatedAt | date:'h:mm d/M/yy'}}</span>
+              </span>
+            </div>
+            
+            <div [innerHTML]="c.content"></div>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

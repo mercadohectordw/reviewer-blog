@@ -18,17 +18,19 @@
       </div>
   
       <img src="{{post.imageUrl}}" alt="{{post.title}}" class="w-full">
-      <div class="my-16" [innerHTML]="post.content"></div>
+      <div class="mt-16 mb-32" [innerHTML]="post.content"></div>
 
-      <div class="flex items-start gap-16 px-16">
-        <a routerLink="/author/{{author!.username}}">
-          <img src="{{author!.imageUrl}}" alt="{{author!.name}}" class="w-40 h-40 object-cover aspect-square rounded-full">
-        </a>
-        <div class="mt-4">
+      <div class="grid grid-cols-5 px-16 gap-8">
+        <div>
+          <a routerLink="/author/{{author!.username}}" class="block w-full">
+            <img src="{{author!.imageUrl}}" alt="{{author!.name}}" class="w-full object-cover aspect-square rounded-full">
+          </a>
+        </div>
+        <div class="pt-4 col-span-4">
           <a routerLink="/author/{{author!.username}}">
             <h3 class="text-2xl">Por <span class="font-bold">{{author!.name}}</span> - <span>@{{author!.username}}</span></h3>
           </a>
-          <p>{{author!.bio}}</p>
+          <p class="my-4">{{author!.bio}}</p>
           <a routerLink="/author/{{author!.username}}" class="underline hover:text-red-500">
             Ver Publicaciones
           </a>
@@ -38,8 +40,12 @@
 
     <section>
       <h4 class="text-xl border-b border-neutral-200">Comentarios</h4>
-      
+
       <ul>
+        <div *ngIf="comments!.length == 0" class="my-16 text-center text-lg text-neutral-400">
+          Este post aún no tiene comentarios
+        </div>
+
         <li *ngFor="let c of comments" class="my-8 flex items-start gap-4">
           <a [routerLink]="c.author!.permissions!.includes('author') ? '/author/' + c.author!.username : '/user/' + c.author!.username">
             <img src="{{c.author!.imageUrl}}" alt="{{c.author!.name}}" class="w-16 h-16 object-cover aspect-square rounded-full">
