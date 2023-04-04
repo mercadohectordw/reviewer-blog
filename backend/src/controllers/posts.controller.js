@@ -11,6 +11,7 @@ const getPost = async(req, res) => {
   let post = await Post.findById(req.params.post_id)
     .populate("author", "username name imageUrl bio");
 
+  if(!post) return res.status(400).send({message: "Post no encontrado"});
   res.status(200).send(post);
 };
 

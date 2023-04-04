@@ -38,7 +38,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="w-full">
       <h4 class="text-xl border-b border-neutral-200">Comentarios</h4>
 
       <ul>
@@ -46,11 +46,11 @@
           Este post aún no tiene comentarios
         </div>
 
-        <li *ngFor="let c of comments" class="my-8 flex items-start gap-4">
+        <li *ngFor="let c of comments; index as i" class="my-8 flex items-start gap-4">
           <a [routerLink]="c.author!.permissions!.includes('author') ? '/author/' + c.author!.username : '/user/' + c.author!.username">
             <img src="{{c.author!.imageUrl}}" alt="{{c.author!.name}}" class="w-16 h-16 object-cover aspect-square rounded-full">
           </a>
-          <div>
+          <div class="flex-1">
             <div class="mb-2 flex items-baseline gap-4">
               <a [routerLink]="c.author!.permissions!.includes('author') ? '/author/' + c.author!.username : '/user/' + c.author!.username">
                 <h4><span class="font-bold">{{c.author!.name}}</span> - <span>@{{c.author!.username}}</span></h4>
@@ -60,10 +60,12 @@
               </span>
             </div>
             
-            <div [innerHTML]="c.content"></div>
+            <div [innerHTML]="c.content" class="mb-4"></div>
 
-            <ul>
-              <li *ngFor="let r of c.replies" class="my-8 flex items-start gap-4">
+            <button type="button" (click)="toggleCreateResponse(i);" class="mb-4 py-1 px-2 text-sm rounded bg-neutral-300">Responder</button>
+
+            <ul class="mb-8 flex flex-col gap-8">
+              <li *ngFor="let r of c.replies" class="flex items-start gap-4">
                 <a [routerLink]="r.author!.permissions!.includes('author') ? '/author/' + r.author!.username : '/user/' + r.author!.username">
                   <img src="{{r.author!.imageUrl}}" alt="{{r.author!.name}}" class="w-16 h-16 object-cover aspect-square rounded-full">
                 </a>
@@ -81,9 +83,17 @@
                 </div>
               </li>
             </ul>
+
+            <div id="createResponse-{{i}}" style="display: none;">
+              <div class="text-lg">Responder</div>
+              <app-create-comment [post_id]="route.snapshot.params['post_id']" [parentComment]="c._id!" (messageEvent)="getComments();"></app-create-comment>
+            </div>
           </div>
         </li>
       </ul>
+
+      <div class="text-lg">Comentar</div>
+      <app-create-comment [post_id]="route.snapshot.params['post_id']" (messageEvent)="getComments();"></app-create-comment>
     </section>
   </div>
 </main>

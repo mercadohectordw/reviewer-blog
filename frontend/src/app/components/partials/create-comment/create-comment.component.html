@@ -1,0 +1,14 @@
+<div *ngIf="enable; else commentDesable">
+  <form (ngSubmit)="createComment();" [formGroup]="comment" method="post">
+    <editor apiKey="ibptgoutvty17rkhlrdqt6qhpz05497pmz57uqrvom6pjxj2" formControlName="content" [init]="{menubar: false, plugins: 'emoticons media image link', toolbar:'undo redo | bold italic | emoticons | link image media', height: 200}"></editor>
+    <button type="submit" class="mt-2 border border-red-500 text-red-500 px-4 py-2 rounded-md hover:bg-red-500 hover:text-white">Enviar</button>
+  </form>
+</div>
+
+<ng-template #commentDesable>
+  <div class="w-full">
+    <div class="text-neutral-500">Solo los usuarios registrados pueden comentar</div>
+    <a routerLink="/registro" class="inline-block mr-4 py-2 px-4 bg-red-100 hover:bg-red-200 rounded">Registrarse</a>
+    <a routerLink="/login" class="inline-block py-2 px-4 bg-red-100 hover:bg-red-200 rounded">Ingresar</a>
+  </div>
+</ng-template>

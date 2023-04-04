@@ -42,7 +42,6 @@ const createComment = async(req, res) => {
   
     let commentCreated = await newComment.save();
     if(commentCreated.parentComment){
-      console.log(commentCreated._id);
       parent.replies.push(commentCreated._id);
       await parent.save({timestamps: false});
     }
@@ -50,7 +49,6 @@ const createComment = async(req, res) => {
     res.status(200).send({message: "Comentario Creado"});
 
   } catch(e) {
-    console.log(e);
     res.status(500).send({message: "Algo salió mal", error: e.message});
   }
 };

@@ -17,7 +17,7 @@ export class PostComponent implements OnInit {
   author!: User;
   comments?: Comment[];
 
-  constructor(private postService: PostService, private commentService: CommentService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private postService: PostService, private commentService: CommentService, public route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.postService.getPost(this.route.snapshot.params['post_id']).subscribe({
@@ -44,5 +44,13 @@ export class PostComponent implements OnInit {
         console.log(err.error.message);
       }
     });
+  }
+
+  toggleCreateResponse(index: number): void{
+    let createResponse = document.getElementById(`createResponse-${index}`)?.style;
+    if(createResponse)
+      createResponse.display == 'none'
+        ? createResponse.display = 'block'
+        : createResponse.display = 'none';
   }
 }
