@@ -12,6 +12,11 @@
             Autores
           </a>
         </li>
+        <li *ngIf="user!.permissions!.includes('author')">
+          <a routerLink="/create-post" class="block py-1 text-lg hover:text-red-500">
+            Crear Post
+          </a>
+        </li>
       </ul>
     </nav>
     

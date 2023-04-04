@@ -8,6 +8,7 @@ import { PostComponent } from './components/pages/post/post.component';
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component';
 import { AuthorProfileComponent } from './components/pages/author-profile/author-profile.component';
 import { UserOptionsComponent } from './components/pages/user-options/user-options.component';
+import { CreatePostComponent } from './components/pages/create-post/create-post.component';
 
 const routes: Routes = [
   {path: "home", component: HomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: "user/:username", component: UserProfileComponent},
   {path: "author/:username", component: AuthorProfileComponent},
   {path: "settings", component: UserOptionsComponent},
+  {path: "create-post", component: CreatePostComponent},
   
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},

@@ -1,1 +1,19 @@
-<p>create-post works!</p>
+<main class="px-8 pt-8 pb-20">
+  <div class="max-w-[1440px] mx-auto">
+    <form (ngSubmit)="createPost();" [formGroup]="post" method="post" class="grid grid-cols-4 gap-8">
+      <div class="col-span-3">
+        <input type="text" formControlName="title" class="mb-4 px-3 py-1 w-full border-2 border-neutral-200 rounded-md" placeholder="Titulo">
+        <editor apiKey="ibptgoutvty17rkhlrdqt6qhpz05497pmz57uqrvom6pjxj2" formControlName="content"></editor>
+      </div>
+  
+      <div class="col-span-1">
+        <input type="text" formControlName="imageUrl" class="mb-4 px-3 py-1 w-full border-2 border-neutral-200 rounded-md" placeholder="Url de Imagen Principal">
+        <input type="text" formControlName="tags" class="px-3 py-1 w-full border-2 border-neutral-200 rounded-md" placeholder="Tags (separados por espacios)">
+        <div class="flex items-baseline justify-end gap-2">
+          <span *ngIf="errorMessage" class="text-red-400 text-sm">{{errorMessage}}</span>
+          <button type="submit" class="mt-2 border border-red-500 text-red-500 px-4 py-2 rounded-md hover:bg-red-500 hover:text-white">Publicar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>

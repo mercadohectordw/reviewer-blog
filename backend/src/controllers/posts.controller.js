@@ -32,8 +32,13 @@ const createPost = async(req, res) => {
     tags
   });
 
-  await newPost.save();
-  res.status(200).send({message: "Post Creado"});
+  try{
+    let postCreated = await newPost.save();
+    res.status(200).send({message: "Post Creado", post: postCreated._id});
+
+  } catch(e) {
+    res.status(400).send({message: "Algo salió mal", error: e.message});
+  }
 };
 
 const updatePost = async(req, res) => {
