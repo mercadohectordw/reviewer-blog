@@ -16,7 +16,9 @@ const getPost = async(req, res) => {
 };
 
 const getAll = async(req, res) => {
-  let posts = await Post.find();
+  let posts = await Post.find({}, "-content -hidden")
+    .sort({createdAt:-1})
+    .populate("author", "username name imageUrl");
 
   res.status(200).send(posts);
 };

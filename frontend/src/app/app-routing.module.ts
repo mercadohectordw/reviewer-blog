@@ -9,9 +9,11 @@ import { UserProfileComponent } from './components/pages/user-profile/user-profi
 import { AuthorProfileComponent } from './components/pages/author-profile/author-profile.component';
 import { UserOptionsComponent } from './components/pages/user-options/user-options.component';
 import { CreatePostComponent } from './components/pages/create-post/create-post.component';
+import { AuthorsComponent } from './components/pages/authors/authors.component';
 
 const routes: Routes = [
   {path: "home", component: HomeComponent},
+  {path: "authors", component: AuthorsComponent},
   {path: "post/:post_id", component: PostComponent},
   {path: "user/:username", component: UserProfileComponent},
   {path: "author/:username", component: AuthorProfileComponent},

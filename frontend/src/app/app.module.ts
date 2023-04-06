@@ -19,6 +19,7 @@ import { AuthorProfileComponent } from './components/pages/author-profile/author
 import { UserOptionsComponent } from './components/pages/user-options/user-options.component';
 import { CreatePostComponent } from './components/pages/create-post/create-post.component';
 import { CreateCommentComponent } from './components/partials/create-comment/create-comment.component';
+import { AuthorsComponent } from './components/pages/authors/authors.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CreateCommentComponent } from './components/partials/create-comment/cre
     AuthorProfileComponent,
     UserOptionsComponent,
     CreatePostComponent,
-    CreateCommentComponent
+    CreateCommentComponent,
+    AuthorsComponent
   ],
   imports: [
     BrowserModule,

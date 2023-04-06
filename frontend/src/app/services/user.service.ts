@@ -34,6 +34,19 @@ export class UserService {
     return this.http.get<any>(this.api + 'users/author/' + username);
   }
   
+  getAllAuthors(): Observable<any>{
+    return this.http.get<any>(this.api + 'users/author');
+  }
+
+  updateUser(username: string, body: any, token: string): Observable<any>{
+    let httpOptions = this.generateHeader(token);
+    return this.http.put<any>(this.api + 'users/' + username, body, httpOptions);
+  }
+
+  updateUserPassword(username: string, body: any, token: string): Observable<any>{
+    let httpOptions = this.generateHeader(token);
+    return this.http.put<any>(this.api + 'users/password/' + username, body, httpOptions);
+  }
 
   generateHeader(token:string): any{
     return {

@@ -10,18 +10,19 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent implements OnInit {
   user?: User;
-  profilePath?: string; 
-  constructor(private userService: UserService, private router: Router) {
+  profilePath?: string;
+
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
     let token = localStorage.getItem("token");
     if(token){
       this.userService.getUserByToken(token).subscribe({
-        next: (res:any) => {
+        next: (res: User) => {
           this.user = res;
 
-          if(res.permissions.includes("author")){
+          if(res.permissions!.includes("author")){
             this.profilePath = `/author/${res.username}`
           } else {
             this.profilePath = `/user/${res.username}`
@@ -36,7 +37,6 @@ export class HeaderComponent implements OnInit {
 
   logout(): void{
     localStorage.removeItem("token");
-    this.user = undefined;
     window.location.reload();
   }
 }

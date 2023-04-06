@@ -26,6 +26,10 @@ export class PostService {
     return this.http.post<any>(this.api + 'posts/', post, httpOptions);
   }
 
+  getAllPosts(): Observable<any>{
+    return this.http.get<any>(this.api + 'posts');
+  }
+
   generateHeader(token:string): any{
     return {
       headers: new HttpHeaders({

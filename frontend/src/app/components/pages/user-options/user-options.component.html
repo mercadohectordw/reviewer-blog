@@ -1,1 +1,47 @@
-<p>user-options works!</p>
+<main class="px-4 sm:px-10 pt-10 pb-20">
+  <div class="mt-16 lg:mt-0 max-w-lg mx-auto p-5 rounded-md outline outline-1 outline-neutral-200 shadow-md">
+    
+    <h2 class="text-xl mb-2">Actualizar datos de cuenta</h2>
+  
+    <form (ngSubmit)="submitData();" [formGroup]="updateData" method="post">
+      <input type="text" formControlName="name" class="mt-2 px-3 py-1 w-full rounded border-2 border-neutral-200" placeholder="Nombre">
+      <span *ngIf="updateData.get('name')?.hasError('required') && updateData.get('name')?.touched" class="text-xs text-red-500">Requerido</span>
+      
+      <input type="text" formControlName="email" class="mt-2 px-3 py-1 w-full rounded border-2 border-neutral-200" placeholder="Email">
+      <span *ngIf="updateData.get('email')?.hasError('required') && updateData.get('email')?.touched" class="text-xs text-red-500">Requerido</span>
+      <span *ngIf="updateData.get('email')?.hasError('email') && updateData.get('email')?.touched" class="text-xs text-red-500">El nuevo email no es valido</span>
+      
+      <input type="text" formControlName="imageUrl" class="mt-2 px-3 py-1 w-full rounded border-2 border-neutral-200" placeholder="Url de su avatar">
+      <span *ngIf="updateData.get('imageUrl')?.hasError('required') && updateData.get('imageUrl')?.touched" class="text-xs text-red-500">Requerido</span>
+
+      <textarea formControlName="bio" class="mt-2 px-3 py-1 w-full rounded border-2 border-neutral-200" placeholder="Bio de usuario"></textarea>
+
+      <div class="mt-4">
+        <button type="submit" class="bg-orange-100 px-4 py-2 rounded-md mr-2">Actualizar</button>
+        <span *ngIf="errorDataMessage != '' && doneDataMessage == '' " class="text-red-400">{{errorDataMessage}}</span>
+        <span *ngIf="doneDataMessage != ''" class="text-green-400">{{doneDataMessage}}</span>
+      </div>
+    </form>
+  
+    <hr class="my-8">
+
+    <h2 class="text-xl mb-2">Cambiar contraseña</h2>
+  
+    <form (ngSubmit)="submitPassword();" [formGroup]="updatePassword" method="post">
+      <input type="password" formControlName="password" class="mt-2 px-3 py-1 w-full rounded border-2 border-neutral-200" placeholder="Password">
+      <span *ngIf="updatePassword.get('password')?.hasError('required') && updatePassword.get('password')?.touched" class="text-xs text-red-500">La contraseña es requerida</span>
+      <span *ngIf="updatePassword.get('password')?.hasError('pattern') && updatePassword.get('password')?.touched" class="text-xs text-red-500">La contraseña debe tener un mínimo de 8 carácteres y un máximo de 16</span>
+      
+      
+      <input type="password" formControlName="confirm_password" class="mt-2 px-3 py-1 w-full rounded border-2 border-neutral-200" placeholder="Confirm Password">
+      <span *ngIf="updatePassword.get('confirm_password')?.hasError('required') && updatePassword.get('confirm_password')?.touched" class="text-xs text-red-500">Requerido</span>
+      <span *ngIf="updatePassword.get('password')?.value != updatePassword.get('confirm_password')?.value && updatePassword.get('confirm_password')?.touched" class="text-xs text-red-500">Las contraseñas no son iguales</span>
+  
+      <div class="mt-4">
+        <button type="submit" class="bg-orange-100 px-4 py-2 rounded-md mr-2">Cambiar</button>
+        <span *ngIf="errorPasswordMessage != '' && donePasswordMessage == '' " class="text-red-400">{{errorPasswordMessage}}</span>
+        <span *ngIf="donePasswordMessage != ''" class="text-green-400">{{donePasswordMessage}}</span>
+      </div>
+    </form>
+  </div>
+</main>

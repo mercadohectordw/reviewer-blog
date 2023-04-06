@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 const getUserByToken = async(req, res) => {
-  let user = await User.findOne({username: req.userData.username}, {bio: 0, password: 0, createdAt: 0, updatedAt: 0});
+  let user = await User.findOne({username: req.userData.username}, {password: 0, createdAt: 0, updatedAt: 0});
 
   if(!user) return res.status(400).send({message: "Usuario no encontrado"});
 
@@ -16,7 +16,7 @@ const getUser = async(req, res) => {
   res.status(200).send(user);
 };
 
-const getAutor = async(req, res) => {
+const getAuthor = async(req, res) => {
   let autor = await User.findOne({username: req.params.username}, {email:0, password:0, updatedAt: 0});
 
   if(!autor || !autor.permissions.includes("author")) return res.status(400).send({message: "Autor no encontrado"});
@@ -25,7 +25,13 @@ const getAutor = async(req, res) => {
 };
 
 const getAll = async (req, res) => {
-  let users = await User.find({}, {password: 0});
+  let users = await User.find({}, "-email -bio -password");
+
+  res.status(200).send(users);
+};
+
+const getAllAuthors = async (req, res) => {
+  let users = await User.find({permissions: {$elemMatch: {$eq: "author"}}}, "-updatedAt -email -bio -password");
 
   res.status(200).send(users);
 };
@@ -36,8 +42,13 @@ const updateUser = async(req, res) => {
   }
 
   let {name, imageUrl, email, bio} = req.body;
-  await User.findOneAndUpdate({username: req.params.username}, {name:name, imageUrl: imageUrl, email: email, bio: bio});
-  res.status(200).send({message: "Usuario Actualizado"});
+
+  try {
+    await User.findOneAndUpdate({username: req.params.username}, {name:name, imageUrl: imageUrl, email: email, bio: bio});
+    res.status(200).send({message: "Usuario Actualizado"});
+  } catch (e) {
+    res.status(400).send({message: "Algo salió mal", error: e});
+  }
 };
 
 const changePassword = async(req, res) => {
@@ -85,8 +96,9 @@ const deleteUser = async(req, res) => {
 module.exports = {
   getUserByToken,
   getUser,
-  getAutor,
+  getAuthor,
   getAll,
+  getAllAuthors,
   updateUser,
   changePassword,
   givePermission,
