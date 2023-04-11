@@ -26,6 +26,9 @@
       <h3 class="mb-8 text-lg border-b border-neutral-200">
         ULTIMOS COMENTARIOS
       </h3>
+      <div *ngIf="comments!.length == 0" class="my-8 text-center text-lg text-neutral-400">
+        {{user.name}} aún no ha comentado
+      </div>
       <ul>
         <li *ngFor="let c of comments" class="my-8 flex items-start gap-4">
           <a routerLink="/post/{{c.post!._id}}">

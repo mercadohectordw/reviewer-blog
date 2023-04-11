@@ -3,7 +3,7 @@
     <form (ngSubmit)="createPost();" [formGroup]="post" method="post" class="grid grid-cols-4 gap-8">
       <div class="col-span-3">
         <input type="text" formControlName="title" class="mb-4 px-3 py-1 w-full border-2 border-neutral-200 rounded-md" placeholder="Titulo">
-        <editor apiKey="ibptgoutvty17rkhlrdqt6qhpz05497pmz57uqrvom6pjxj2" formControlName="content"></editor>
+        <editor apiKey="ibptgoutvty17rkhlrdqt6qhpz05497pmz57uqrvom6pjxj2" formControlName="content" [init]="{menubar: true, plugins: 'emoticons media image link lists wordcount', toolbar:'undo redo | bold italic lists | alignleft aligncenter alignright alignjustify | emoticons link image media | bullist numlist outdent indent |', height: 500}"></editor>
       </div>
   
       <div class="col-span-1">

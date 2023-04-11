@@ -17,16 +17,18 @@ export class UserProfileComponent implements OnInit {
   constructor(private userService: UserService, private commentService: CommentService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.userService.getUser(this.route.snapshot.params['username']).subscribe({
-      next: (res:User) => {
-        this.user = res;
-        document.title = `${this.user.name} - Reviewer`;
-        if(!this.user) this.router.navigateByUrl("/page-not-found");
-        this.getComments(this.user._id!);
-      },
-      error: (err:any) => {
-        this.router.navigateByUrl("/page-not-found");
-      }
+    this.route.params.subscribe(params => {
+      this.userService.getUser(params['username']).subscribe({
+        next: (res:User) => {
+          this.user = res;
+          document.title = `${this.user.name} - Reviewer`;
+          if(!this.user) this.router.navigateByUrl("/page-not-found");
+          this.getComments(this.user._id!);
+        },
+        error: (err:any) => {
+          this.router.navigateByUrl("/page-not-found");
+        }
+      });
     });
   }
 

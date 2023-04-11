@@ -20,18 +20,20 @@ export class AuthorProfileComponent implements OnInit {
   constructor(private userService: UserService, private postService: PostService, private commentService: CommentService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.userService.getAuthor(this.route.snapshot.params['username']).subscribe({
-      next: (res:any) => {
-        this.author = res;
-        document.title = `${this.author.name} - Reviewer`;
-        if(!this.author) this.router.navigateByUrl("/page-not-found");
-        this.getPosts(this.author._id!);
-        this.getComments(this.author._id!);
-      },
-      error: (err:any) => {
-        this.router.navigateByUrl("/page-not-found");
-      }
-    });
+    this.route.params.subscribe(params => {
+      this.userService.getAuthor(params['username']).subscribe({
+        next: (res:any) => {
+          this.author = res;
+          document.title = `${this.author.name} - Reviewer`;
+          if(!this.author) this.router.navigateByUrl("/page-not-found");
+          this.getPosts(this.author._id!);
+          this.getComments(this.author._id!);
+        },
+        error: (err:any) => {
+          this.router.navigateByUrl("/page-not-found");
+        }
+      });
+    })
   }
 
   getPosts(author_id: string): void{
